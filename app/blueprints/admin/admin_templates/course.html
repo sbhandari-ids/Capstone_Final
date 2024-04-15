@@ -1,0 +1,32 @@
+{%extends 'base.html'%}
+
+{%block title%} 
+Sign Up 
+{%endblock%}
+{%block styles%} 
+<link rel = "stylesheet" href = "../static/styles/login.css" >
+{%endblock%}
+{%block content%} 
+{%include './includes/navbar.html'%}        
+
+
+<div class = "container">
+<form method = 'POST'>
+    {{form.hidden_tag()}}
+    <div class="mb-3">
+        <div class="mb-3">
+          <h2 class="title-txt">Add Course</h2>
+     <div class="mb-3">
+      <label for="coursename" class="form-label">Course </label>
+        {{form.coursename(class='form-control', id="coursename")}}
+    <div class="mb-3">
+      <label for="shortname" class="form-label">ShortName </label>
+      {{form.shortname(class='form-control', id="shortname")}}
+    </div>
+    <div class="mb-3">
+
+      {{form.submit_btn(class='btn my-btn', id='btn_course')}}
+    </div>
+  </form>
+</div>
+{%endblock%}

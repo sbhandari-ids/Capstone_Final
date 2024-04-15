@@ -1,0 +1,43 @@
+{%extends "base.html"%}
+
+{%block title%} Login {%endblock%}
+
+{%block styles%} 
+<link rel = "stylesheet" href = "../static/styles/login.css" >
+{%endblock%}
+
+    {%block content%} 
+    
+    {%include './includes/navbar.html'%}  
+   <div class="container d-flex">
+    <form method = 'POST'>
+      {{form.hidden_tag()}}
+      <div class="mb-3">
+        <img src="../static/images/logo.png" width="200px" alt="the,basics"class="logo-img">
+        <hr/>        </div>
+        
+          <div class="mb-3">
+            <h2 class="title-txt"> Login </h2>
+        <div class="mb-3">
+          <label for="email" class="form-label" placeholder="Email Address">Email</label>
+          {{form.email(class='form-control', id="email")}}
+        </div>
+      
+          
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          {{form.password(class='form-control', id="password")}}
+        </div>
+       
+        {{form.submit_btn(class = "btn my-btn", id = 'btn_login')}}
+        
+        <div>
+        <br/>
+        <a href="/forgotPassword" class="a2" onclick="forgotPassword()"><small>Forgot Password? </small></a>
+      </div>
+      </form>
+      </div>
+
+      {%endblock%}
+
+

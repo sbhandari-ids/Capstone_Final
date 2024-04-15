@@ -1,0 +1,30 @@
+<nav class="navbar navbar-light bg-light justify-content-between">
+  <div class="ms-20">
+      <a class="navbar-brand" href="/">
+          <img src="../static/images/logo1.jpeg" width="150px" alt="the,basics">
+      </a>
+  </div>
+
+  <div class="me-20">
+      {% if current_user.is_anonymous %}
+          <a href="{{ url_for('auth.login') }}" class="btn btn-outline-success my-2 my-sm-2" type="submit">Login</a>
+          <a href="{{ url_for('auth.signup') }}" class="btn btn-outline-success my-2 my-sm-2 margin-right: 1rem" type="submit">SignUp</a>
+      {% else %}
+          {% if current_user.email == 'admin@admin.com' %}
+              <a href="{{ url_for('admin.qfeed') }}" class="btn btn-outline-success my-2 my-sm-2 margin-right: 1rem" type="submit">Admin</a>
+          {% endif %}
+          <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-success my-2 my-sm-2 margin-right: 1rem" type="submit">Log Out</a>
+      {% endif %}
+  </div>
+</nav>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+      {% for category, message in messages %}
+          <div class="alert art-{{ category }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      {% endfor %}
+  {% endif %}
+{% endwith %}

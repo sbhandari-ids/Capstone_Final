@@ -1,0 +1,85 @@
+{%extends 'base.html'%}
+
+{%block title%} 
+Home 
+{%endblock%}
+{%block styles%} 
+<link rel = "stylesheet" href="/app/static/styles/etc.css"> 
+{%endblock%}
+{%block content%} 
+
+{%include './includes/navbar.html'%}
+{%include './includes/coursebar.html'%}
+<h1>Welcome to the Learning Basics</h1>
+
+  <div class="container">
+  <div class="card card-home text-center">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs" id="cardTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="quiz-tab" data-bs-toggle="tab" href="#quiz" role="tab" aria-controls="quiz" aria-selected="true"><strong>Quiz</strong></a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="exercise-tab" data-bs-toggle="tab" href="#exercise" role="tab" aria-controls="exercise" aria-selected="false">Exercise</a>
+        </li>
+    
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="search-tab" data-bs-toggle="tab" href="#search" role="tab" aria-controls="search" aria-selected="false">Search</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body card-home">
+      <div class="tab-content" id="cardTabContent">
+        <div class="tab-pane fade show active" id="quiz" role="tabpanel" aria-labelledby="quiz-tab">
+          <!-- <h5 class="card-title">Quiz Section</h5>
+          <p class="card-text">This is the content for the Quiz tab.</p>
+          <a href="/quiz" class="btn btn-primary" onclick="quiz()">Start Quiz</a> -->
+          <!-- <div><img src="/app/static/images/logo1.jpeg" width="500px" height="500px" > </div> -->
+          <div class="card mb-3" >
+            <div class="row g-0">
+              <div class="col-md-6">
+                <img src="../static/images/quizLogo.jpeg" width="300px" alt="the,basics"class="logo-img">         
+              </div>
+
+
+
+              <div class="col-md-6" style="text-align: left;">
+                <div class="card-body">
+                  <h5 class="card-title">Quiz Whizz</h5>
+                  <div style="text-align: left;">
+                    <p class="card-text "> Welcome to the Quiz Challenge! Get ready to brush up on your knowledge and uncover new facts with our interactive quizzes.<br/> Let's <strong><i>Learn </i></strong>the <strong><i>Fun</i></strong> way!"</p>
+                    <a href="{{ url_for('main.quiz') }}" class="btn btn-primary">Start Quiz</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div></div>
+        </div>
+        <div class="tab-pane fade" id="exercise" role="tabpanel" aria-labelledby="exercise-tab">
+          <h5 class="card-title">Exercise Section</h5>
+          <br/>
+          <p class="card-text"><h4>!! COMING SOON !!</h4></p>
+          <a href="/exercise" class="btn btn-primary"> Loading...</a>
+        </div>
+    
+        <div class="tab-pane fade" id="search" role="tabpanel" aria-labelledby="search-tab">
+          <div class="card-body">
+            <h5 class="card-title">Search to Learn</h5>
+            <p class="card-text"><i>Search for related online articles</i></p>
+            <script async src="https://cse.google.com/cse.js?cx=e1269415a966c4861"></script>
+            <div class="gcse-searchbox"></div>
+          </div>
+          <div>
+            <div class="gcse-searchresults"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  {%include './includes/footer.html'%}
+
+{%endblock%}
+

@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Questions Feed{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="/app/static/styles/login.css">
+{% endblock %}
+
+{% block content %}
+{% include './includes/navbar.html' %}
+{% include './includes/coursebar.html' %}
+
+<div id="question-container" class="container">
+    {% for question in questions %}
+    <div class="question" id="question-{{ loop.index }}" style="{{ 'display:none;' if not loop.first }}">
+        <h2>{{ loop.index }}- Question #{{ question.id }}</h2>
+        <p>{{ question.questiona }}</p>
+        <ul class="options">
+            <li onclick="selectAnswer('A', {{ loop.index }})">a. {{ question.option_a }}</li>
+            <li onclick="selectAnswer('B', {{ loop.index }})">b. {{ question.option_b }}</li>
+            <li onclick="selectAnswer('C', {{ loop.index }})">c. {{ question.option_c }}</li>
+            <li onclick="selectAnswer('D', {{ loop.index }})">d. {{ question.option_d }}</li>
+            
+        </ul>
+        
+        <!-- <p hidden > question.answer</p> -->
+        <div id="selected-answer-{{ loop.index }}">Selected Answer: None</div>
+        <p> </p>
+        <button id="previous-button-{{ loop.index }}" onclick="previousQuestion()">Previous</button>
+        <button id="next-button-{{ loop.index }}" onclick="nextQuestion()">Next</button>
+
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+let totalQuestions = {{ questions|length }};
+let currentQuestionIndex = 1;
+let totalScore = 0;
+let correctAnswers = 0; 
+let systemAnswer = question.answer
+
+function showQuestion(number) {
+    for (let i = 1; i <= totalQuestions; i++) {
+        document.getElementById('question-' + i).style.display = 'none';
+    }
+    let questionToShow = document.getElementById('question-' + number);
+    if (questionToShow) {
+        questionToShow.style.display = 'block';
+    }
+    currentQuestionIndex = number;
+    updateNavigationButtons();
+}
+
+function selectAnswer(answer, questionIndex) {
+    document.getElementById('selected-answer-' + questionIndex).textContent = 'Selected Answer: ' + answer;
+}
+function score(answer, questionIndex) {
+    document.getElementById('selected-answer-' + questionIndex).textContent = 'Selected Answer: ' + answer;
+}
+
+
+function previousQuestion() {
+    if (currentQuestionIndex > 1) {
+        showQuestion(currentQuestionIndex - 1);
+    }
+}
+
+function nextQuestion() {
+    if (currentQuestionIndex < totalQuestions) {
+        showQuestion(currentQuestionIndex + 1);
+    }
+}
+
+function updateScore(answer, questionIndex, systemAnswer, questionScore ){
+    if answer === systemAnswer{
+        score += questionScore;
+    }
+}
+
+function updateCorrectAnswerCount(answer, questionIndex, systemAnswer, questionScore ){
+    if answer === systemAnswer{
+        correctAnswer +=1;
+    }
+}
+
+function updateNavigationButtons() {
+    let previousButton = document.getElementById('previous-button-' + currentQuestionIndex);
+    let nextButton = document.getElementById('next-button-' + currentQuestionIndex);
+    
+    if (previousButton) {
+        previousButton.disabled = (currentQuestionIndex === 1);
+    }
+    
+    if (nextButton) {
+        nextButton.disabled = (currentQuestionIndex === totalQuestions);
+    }
+}
+
+// Initially show the first question
+showQuestion(1);
+</script>
+{%include './includes/footer.html'%}
+{% endblock %}
